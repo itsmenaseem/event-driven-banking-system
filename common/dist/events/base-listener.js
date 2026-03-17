@@ -1,49 +1,34 @@
-
-import { Consumers } from "./types/consumers.type";
-import { Streams } from "./types/streams.type";
-import { Subjects } from "./types/subjects.type";
-import { JetStreamClient, JsMsg, StringCodec } from "nats"
-
-const sc = StringCodec();
-
-export interface Event {
-    stream: Streams,
-    consumer: Consumers,
-    subject: Subjects
-    data: any,
-}
-
-
-async function sendDataToDLQ(js: JetStreamClient, payload: any, subject: Subjects): Promise<boolean> {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BaseListener = void 0;
+const subjects_type_1 = require("./types/subjects.type");
+const nats_1 = require("nats");
+const sc = (0, nats_1.StringCodec)();
+async function sendDataToDLQ(js, payload, subject) {
     try {
         await js.publish(subject, sc.encode(JSON.stringify(payload)));
-        return true
-    } catch (error) {
+        return true;
+    }
+    catch (error) {
         console.error(error);
         return false;
     }
 }
-
-export abstract class BaseListener<T extends Event> {
-    abstract subject: T["subject"];
-    abstract stream: T["stream"];
-    abstract consumer: T["consumer"];
-    constructor(private js: JetStreamClient) { }
-    abstract onMessage(data: T["data"]): Promise<void>;
+class BaseListener {
+    js;
+    constructor(js) {
+        this.js = js;
+    }
     async listen() {
-        const consumer = await this.js.consumers.get(
-            this.stream,
-            this.consumer
-        );
-
+        const consumer = await this.js.consumers.get(this.stream, this.consumer);
         const messages = await consumer.consume();
-
         for await (let message of messages) {
-            let parsedData: T["data"];
+            let parsedData;
             // parse message data into json
             try {
                 parsedData = JSON.parse(sc.decode(message.data));
-            } catch (err) {
+            }
+            catch (err) {
                 console.error(err);
                 const payload = {
                     originalSubject: message.subject,
@@ -54,15 +39,17 @@ export abstract class BaseListener<T extends Event> {
                     stream: this.stream,
                     consumer: this.consumer
                 };
-                const isSent = await sendDataToDLQ(this.js, payload, Subjects.Corrupt);
-                if (isSent) message.ack();
+                const isSent = await sendDataToDLQ(this.js, payload, subjects_type_1.Subjects.Corrupt);
+                if (isSent)
+                    message.ack();
                 continue;
             }
             // consume message 
             try {
                 await this.onMessage(parsedData);
                 message.ack();
-            } catch (err) {
+            }
+            catch (err) {
                 console.error(err);
                 const payload = {
                     originalSubject: message.subject,
@@ -74,11 +61,13 @@ export abstract class BaseListener<T extends Event> {
                     consumer: this.consumer
                 };
                 if (message.info.deliveryCount >= 5) {
-                    const isSent = await sendDataToDLQ(this.js, payload, Subjects.Failed);
-                    if (isSent) message.ack();
+                    const isSent = await sendDataToDLQ(this.js, payload, subjects_type_1.Subjects.Failed);
+                    if (isSent)
+                        message.ack();
                 }
-
             }
         }
     }
 }
+exports.BaseListener = BaseListener;
+//# sourceMappingURL=base-listener.js.map

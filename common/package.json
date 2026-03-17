@@ -1,11 +1,16 @@
 {
-  "name": "common",
-  "version": "1.0.0",
+  "name": "@banking-event/common",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "del-cli \"dist\"",
+    "build": "npm run clean && tsc"
   },
+  "files": [
+    "./dist/**/*"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,7 +21,9 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "del-cli": "^7.0.0",
     "express": "^5.2.1",
-    "express-validator": "^7.3.1"
+    "express-validator": "^7.3.1",
+    "nats": "^2.29.3"
   }
 }
