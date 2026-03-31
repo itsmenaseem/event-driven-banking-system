@@ -1,0 +1,1 @@
+{"version":3,"file":"account-withdrawn.type.d.ts","sourceRoot":"","sources":["../../../src/events/types/account-withdrawn.type.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAE,MAAM,iBAAiB,CAAC;AAG3C,MAAM,WAAW,qBAAqB;IAClC,OAAO,EAAC,QAAQ,CAAC,gBAAgB,CAAC;IAClC,IAAI,EAAC;QACD,SAAS,EAAC,MAAM,CAAC;QACjB,MAAM,EAAC,MAAM,CAAA;KAChB,CAAA;CACJ"}

@@ -1,1 +1,1 @@
-{"version":3,"file":"subjects.type.d.ts","sourceRoot":"","sources":["../../../src/events/types/subjects.type.ts"],"names":[],"mappings":"AACA,oBAAY,QAAQ;IAChB,cAAc,oBAAoB;IAClC,eAAe,qBAAqB;IACpC,gBAAgB,sBAAsB;IACtC,kBAAkB,wBAAwB;IAC1C,OAAO,gBAAgB;IACvB,MAAM,eAAe;CACxB"}
+{"version":3,"file":"subjects.type.d.ts","sourceRoot":"","sources":["../../../src/events/types/subjects.type.ts"],"names":[],"mappings":"AACA,oBAAY,QAAQ;IAChB,cAAc,oBAAoB;IAClC,eAAe,qBAAqB;IACpC,gBAAgB,sBAAsB;IACtC,kBAAkB,wBAAwB;IAC1C,kBAAkB,wBAAwB;IAC1C,OAAO,gBAAgB;IACvB,MAAM,eAAe;CACxB"}

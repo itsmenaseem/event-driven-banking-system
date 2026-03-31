@@ -7,8 +7,6 @@ import { JetStreamClient, JsMsg, StringCodec } from "nats"
 const sc = StringCodec();
 
 export interface Event {
-    stream: Streams,
-    consumer: Consumers,
     subject: Subjects
     data: any,
 }
@@ -26,8 +24,8 @@ async function sendDataToDLQ(js: JetStreamClient, payload: any, subject: Subject
 
 export abstract class BaseListener<T extends Event> {
     abstract subject: T["subject"];
-    abstract stream: T["stream"];
-    abstract consumer: T["consumer"];
+    abstract stream: Streams;
+    abstract consumer: Consumers;
     constructor(private js: JetStreamClient) { }
     abstract onMessage(data: T["data"]): Promise<void>;
     async listen() {

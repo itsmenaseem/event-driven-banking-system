@@ -6,6 +6,7 @@ var Subjects;
     Subjects["AccountCreated"] = "account.created";
     Subjects["AccountDeposite"] = "account.deposite";
     Subjects["AccountWithdrawn"] = "account.withdrawn";
+    Subjects["AccountTransferred"] = "account.transferred";
     Subjects["TransactionCreated"] = "transaction.created";
     Subjects["Corrupt"] = "dlq.corrupt";
     Subjects["Failed"] = "dlq.failed";

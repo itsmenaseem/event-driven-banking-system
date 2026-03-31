@@ -3,6 +3,7 @@ export enum Subjects {
     AccountCreated = "account.created",
     AccountDeposite = "account.deposite",
     AccountWithdrawn = "account.withdrawn",
+    AccountTransferred = "account.transferred",
     TransactionCreated = "transaction.created",
     Corrupt = "dlq.corrupt",
     Failed = "dlq.failed",

@@ -3,6 +3,8 @@ import "dotenv/config";
 import { PortConfig } from "./configs/port.config";
 import { dbConnect, dbDisconnect } from "./wrappers/db.wrapper";
 import { Server } from "node:http";
+import { NatsWrapper } from "./wrappers/nats.wrapper";
+import { natsConfig } from "./configs/nats.config";
 
 async function runServer() {
     const PORT = PortConfig.PORT;
@@ -48,7 +50,9 @@ async function runServer() {
     process.on("SIGINT", () => gracefulShutdown(0));
 
     try {
-        await dbConnect();
+        const url = natsConfig.server
+        // await dbConnect();
+        await NatsWrapper.connect(url!);
         server = app.listen(PORT, () => {
             console.log(`Server listening on PORT: ${PORT}`);
         });

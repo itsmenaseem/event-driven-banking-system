@@ -8,4 +8,7 @@ export * from "./events/types/subjects.type";
 export * from "./events/types/streams.type";
 export * from "./middlewares/error.middleware";
 export * from "./middlewares/request-validation.middleware";
+export * from "./events/types/account-created.type";
+export * from "./events/types/account-transferred.type";
+export * from "./events/types/account-withdrawn.type";
 //# sourceMappingURL=index.d.ts.map

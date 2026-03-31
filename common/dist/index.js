@@ -24,4 +24,7 @@ __exportStar(require("./events/types/subjects.type"), exports);
 __exportStar(require("./events/types/streams.type"), exports);
 __exportStar(require("./middlewares/error.middleware"), exports);
 __exportStar(require("./middlewares/request-validation.middleware"), exports);
+__exportStar(require("./events/types/account-created.type"), exports);
+__exportStar(require("./events/types/account-transferred.type"), exports);
+__exportStar(require("./events/types/account-withdrawn.type"), exports);
 //# sourceMappingURL=index.js.map
